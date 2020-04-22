@@ -7,7 +7,7 @@
  *
  * Released under the MIT License
  *
- * Released on: April 21, 2020
+ * Released on: April 22, 2020
  */
 
 (function (global, factory) {
@@ -5078,9 +5078,9 @@
       var swiper = this;
       var params = swiper.params.mousewheel;
 
-      // if (swiper.params.cssMode) {
-      //   e.preventDefault();
-      // }
+      if (swiper.params.cssMode) {
+        e.preventDefault();
+      }
 
       var target = swiper.$el;
       if (swiper.params.mousewheel.eventsTarged !== "container") {
@@ -5360,10 +5360,10 @@
     enable: function enable() {
       var swiper = this;
       var event = Mousewheel.event();
-      // if (swiper.params.cssMode) {
-      //   swiper.wrapperEl.removeEventListener(event, swiper.mousewheel.handle);
-      //   return true;
-      // }
+      if (swiper.params.cssMode) {
+        swiper.wrapperEl.addEventListener(event, swiper.mousewheel.handle);
+        return true;
+      }
       if (!event) { return false; }
       if (swiper.mousewheel.enabled) { return false; }
       var target = swiper.$el;
@@ -5380,7 +5380,7 @@
       var swiper = this;
       var event = Mousewheel.event();
       if (swiper.params.cssMode) {
-        swiper.wrapperEl.addEventListener(event, swiper.mousewheel.handle);
+        swiper.wrapperEl.removeEventListener(event, swiper.mousewheel.handle);
         return true;
       }
       if (!event) { return false; }
@@ -5428,9 +5428,6 @@
     on: {
       init: function init() {
         var swiper = this;
-        // if (!swiper.params.mousewheel.enabled && swiper.params.cssMode) {
-        //   swiper.mousewheel.disable();
-        // }
         if (swiper.params.mousewheel.enabled) { swiper.mousewheel.enable(); }
       },
       destroy: function destroy() {

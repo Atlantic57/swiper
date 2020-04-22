@@ -7,7 +7,7 @@
  *
  * Released under the MIT License
  *
- * Released on: April 21, 2020
+ * Released on: April 22, 2020
  */
 
 import { $, addClass, removeClass, hasClass, toggleClass, attr, removeAttr, data, transform, transition as transition$1, on, off, trigger, transitionEnd as transitionEnd$1, outerWidth, outerHeight, offset, css, each, html, text, is, index, eq, append, prepend, next, nextAll, prev, prevAll, parent, parents, closest, find, children, filter, remove, add, styles } from 'dom7/dist/dom7.modular';
@@ -4142,9 +4142,9 @@ const Mousewheel = {
     const swiper = this;
     const params = swiper.params.mousewheel;
 
-    // if (swiper.params.cssMode) {
-    //   e.preventDefault();
-    // }
+    if (swiper.params.cssMode) {
+      e.preventDefault();
+    }
 
     let target = swiper.$el;
     if (swiper.params.mousewheel.eventsTarged !== "container") {
@@ -4423,10 +4423,10 @@ const Mousewheel = {
   enable() {
     const swiper = this;
     const event = Mousewheel.event();
-    // if (swiper.params.cssMode) {
-    //   swiper.wrapperEl.removeEventListener(event, swiper.mousewheel.handle);
-    //   return true;
-    // }
+    if (swiper.params.cssMode) {
+      swiper.wrapperEl.addEventListener(event, swiper.mousewheel.handle);
+      return true;
+    }
     if (!event) return false;
     if (swiper.mousewheel.enabled) return false;
     let target = swiper.$el;
@@ -4443,7 +4443,7 @@ const Mousewheel = {
     const swiper = this;
     const event = Mousewheel.event();
     if (swiper.params.cssMode) {
-      swiper.wrapperEl.addEventListener(event, swiper.mousewheel.handle);
+      swiper.wrapperEl.removeEventListener(event, swiper.mousewheel.handle);
       return true;
     }
     if (!event) return false;
@@ -4491,9 +4491,6 @@ var mousewheel = {
   on: {
     init() {
       const swiper = this;
-      // if (!swiper.params.mousewheel.enabled && swiper.params.cssMode) {
-      //   swiper.mousewheel.disable();
-      // }
       if (swiper.params.mousewheel.enabled) swiper.mousewheel.enable();
     },
     destroy() {
